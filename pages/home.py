@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Stocks Dashboard", page_icon="💹", layout="wide")
 
-st.markdown("# :green[Welcome to Financials analysis for the main stocks in the S&P 500 🚀]")
+st.markdown("# :green[🐢 Welcome to Financials analysis for the main stocks in the S&P 500 🚀]")
 
 st.markdown("##### :green[v3.0 Technical & Fundamental Anaylsis]")
 
@@ -11,35 +11,18 @@ st.markdown("""
         """
 )
 
-col_1, col_2, col_3 = st.columns([0.5,1.5,5])
-
-with col_1:
-    st.image('.\images\icons8-linkedin.svg', width=60)
-with col_2:
-    st.markdown(""" 
-                [**Edgar Trejo**](https://www.linkedin.com/in/edgar-trejo-03077748)
+st.markdown(""" 
+                - [**Edgar Trejo**](https://www.linkedin.com/in/edgar-trejo-03077748)
                 """)
-    st.html('<a target="_blank" href="https://icons8.com/icon/13930/linkedin">LinkedIn</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a>')
 
-with col_3:
-    st.write("")
 
-col_1, col_2, col_3 = st.columns([0.5,1.5,5])
 
-with col_1:
-    st.image('.\images\icons8-twitterx.svg', width=60)
-with col_2:
-    st.markdown(""" 
-                [**@EconoDataMx**](https://x.com/EconoDataMx)
+st.markdown(""" 
+                - [**@EconoDataMx**](https://x.com/EconoDataMx)
                 """)
-    st.html('<a target="_blank" href="https://icons8.com/icon/phOKFKYpe00C/twitterx">X</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a>')
-
-with col_3:
-    st.write("")
-
 st.markdown("""
              
-        🐢 :green[**More info:** ] [![EconoDataMx Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://econodatamx-v1.streamlit.app/)  
+        - :green[**More info:** ] [![EconoDataMx Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://econodatamx-v1.streamlit.app/)  
         """
         
 )
