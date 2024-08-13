@@ -1,10 +1,9 @@
 import streamlit as st
-import functions as fc  
+from Functions import functions as fc     
 import pandas as pd 
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from millify import prettify
 
 st.markdown(
     """
@@ -40,6 +39,7 @@ def safe_access(df, index, column):
 
 list_1 = [i for i in range(14)]
 list_2 = [i for i in range(39)]
+
 company_selected = st.session_state["selected_company"]            
 
 income_statement = cargar_datos(fc.filtrar_datos,'IS_001', list_1, company_selected)
@@ -323,10 +323,10 @@ CAGR_chart = px.bar(
     x ="Component",
     y = "CAGR",
     color="Component",
-    color_discrete_sequence=["red", 
-                            "blue", 
-                            "green", 
-                            "gray"],
+    color_discrete_sequence=["#163266", 
+                            "#0f3c90", 
+                            "#376ac9", 
+                            "#789de1"],
     title = f"{empresa} - CAGR",
 )
 
@@ -349,28 +349,31 @@ CAGR_chart.update_layout(
         # VISUALIZATION
 #************************************************
 
-
 current_year, historical_data, resume_CAGR = st.tabs([":date: Current Year", 
                                                                 ":clipboard: Historical Data", 
                                                                 ":chart_with_upwards_trend: CAGR", 
                                                                 ])
 
 with current_year:
-    
-    st.markdown(f"### :green[{empresa} - 1Q2024 :pushpin:    ]")
-    st.markdown(f":blue[(in millions)]")
 
-    v1, m1, m2, m3, v2 = st.columns(5)
-
-    total_costs = income_statement_current['Revenues'].iloc[0]-income_statement_current['Net income'].iloc[0]
+    container =st.container(border=True)
     
-    with st.container():
+    with container:
+
+        st.markdown(f"### :green[{empresa} - 1Q2024 :pushpin:    ]")
+        st.markdown(f":blue[(in millions)]")
+
+        v1, m1, m2, m3, v2 = st.columns(5)
+
+        total_costs = income_statement_current['Revenues'].iloc[0]-income_statement_current['Net income'].iloc[0]
+    
+        
         st.html(f'<span class="st-emotion-cache-1wivap2"></span>')
 
         v1.write("")
-        m1.metric(":blue[Revenues]", prettify(income_statement_current['Revenues'].iloc[0]))
-        m2.metric(':blue[Total Costs]', prettify(total_costs))
-        m3.metric(':blue[Net Income]', prettify(income_statement_current['Net income'].iloc[0]))
+        m1.metric(":blue[Revenues]", value=f"{int(income_statement_current['Revenues'].iloc[0]):,}")
+        m2.metric(':blue[Total Costs]', value=f"{int(total_costs):,}")
+        m3.metric(':blue[Net Income]', value=f"{int(income_statement_current['Net income'].iloc[0]):,}")
         v2.write("")
         
         c1, n1, n2, n3, c2 = st.columns(5)
@@ -499,7 +502,7 @@ with historical_data:
 
 with resume_CAGR:
 
-    st.markdown("##:green[Compound Annual Growth Rate]")
+    st.markdown("## :green[Compound Annual Growth Rate]")
 
     chart, data = st.columns([2,1])
 

@@ -1,5 +1,5 @@
 import streamlit as st 
-import functions as fc 
+from Functions import functions as fc 
 import numpy as np 
 import plotly.graph_objects as go
 import plotly.express as px
@@ -24,7 +24,9 @@ st.markdown("# :green[1. Technical Analysis 📈]")
 #1. Definir las variables
 catalogo = fc.cargar_datos_gsheets('CAT_001', [0,1]) 
 stocks = catalogo['Empresa']
+
 empresa =st.selectbox(":blue[***Please select an option:***]", stocks, help = 'Filter report to show only one Stock') 
+
 benchmark = "^GSPC"
 ticker = catalogo[catalogo['Empresa']==empresa]['Ticker'].values[0]     
 
@@ -83,11 +85,11 @@ data['BOLD'] = data['MA-Close'] - 2 * data['Std']
 
 #4. Visualización de resultados
 #4.1 Estadísticas
-st.title(empresa)
+st.markdown(f"### :green[{empresa}]")
 
 st.markdown(
     """
-    > ### 📊 :blue[Statistics]
+    > ### 📊 :green[Statistics]
 
     """
     )
@@ -100,7 +102,7 @@ st.text(len(data)* "*")
 #4.2.1 Time Series
 st.markdown(
     """
-    > ### 📈 :blue[Charts]
+    > ### 📈 :green[Charts]
     >
     >> ### :green[1. Time Series]
 

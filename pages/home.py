@@ -1,10 +1,10 @@
 import streamlit as st 
 
-st.set_page_config(page_title="Stocks Dashboard", page_icon="💹", layout="wide")
+#st.set_page_config(page_title="Stocks Dashboard", page_icon="💹", layout="wide")
 
 st.markdown("# :green[🐢 Welcome to Financials analysis for the main stocks in the S&P 500 🚀]")
 
-st.markdown("##### :green[v3.0 Technical & Fundamental Anaylsis]")
+st.markdown("##### :green[v3.2 Technical & Fundamental Anaylsis]")
 
 st.markdown("""
         #### :green[Developed by:]     
@@ -26,41 +26,6 @@ st.markdown("""
         """
         
 )
-
-st.markdown(
-    """
-
-    **This demo shows the use of *Streamlit* 
-    for data analysis and data visualization with Python code, 
-    powered with libraries such as:
-
-    - **St-Gsheets-Connection:**
-
-     ```sh
-    pip install st-gsheets-connection
-    ```
-
-    [**gsheets-connection**](https://github.com/streamlit/gsheets-connection)
-    
-    - **yfinance:**
-     ```sh
-    pip install yfinance
-    ```   
-    [**yfinance**](https://pypi.org/project/yfinance/)
-
-    - **Plotly:**
-
-     ```sh
-    $ pip install plotly==5.22.0
-    ```
-
-    [**Plotly**](https://plotly.com/python/)
-
-    And others.**
-    
-    """
-)
-"----------"
 
 st.markdown(
     """
