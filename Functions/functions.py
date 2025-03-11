@@ -7,6 +7,29 @@ import numpy as np
 from streamlit_gsheets import GSheetsConnection
 
 @st.cache_resource(ttl=6000)  # Almacena en caché los resultados durante 1 hora (3600 segundos)
+def cargar_datos_yfinance(symbol: str, period: str):
+    try:
+        df = yf.download(symbol, period=period)
+        
+        if df.empty:
+            st.error(f"No se encontraron datos para el símbolo '{symbol}' en el periodo '{period}'.")
+            return None
+        
+        df.reset_index(inplace=True)
+
+        # Limpieza de columnas (Manejo de MultiIndex y renombrado)
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.droplevel(0)  # Elimina el primer nivel
+
+        column_names = ["Open", "High", "Low", "Close", "Adj Close", "Volume"]
+        df.columns = column_names[:len(df.columns)]  # Ajusta dinámicamente
+        
+        return df
+    except Exception as e:
+        st.error(f"Error al cargar los datos de Yahoo Finance para el símbolo '{symbol}': {str(e)}")
+        return None
+
+@st.cache_resource(ttl=6000)
 def cargar_datos_gsheets(worksheet_name: str, columns: list= None):
     conn = st.connection("gsheets", type=GSheetsConnection)
     try:
@@ -14,16 +37,6 @@ def cargar_datos_gsheets(worksheet_name: str, columns: list= None):
         return df
     except Exception as e:
         st.error(f"Error al cargar los datos de la hoja de cálculo '{worksheet_name}': {str(e)}")
-        return None
-
-@st.cache_resource(ttl=6000)
-def cargar_datos_yfinance(symbol: str, period: str):
-    try:
-        df = yf.download(symbol, period=period)
-        df = df.reset_index()
-        return df
-    except Exception as e:
-        st.error(f"Error al cargar los datos de Yahoo Finance para el símbolo '{symbol}': {str(e)}")
         return None
 
 def CAGR_calculate(final_value,initial_value, years):
