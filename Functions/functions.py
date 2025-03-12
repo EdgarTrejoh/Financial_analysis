@@ -21,7 +21,7 @@ def cargar_datos_yfinance(symbol: str, period: str):
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.droplevel(0)  # Elimina el primer nivel
 
-        column_names = ["Open", "High", "Low", "Close", "Adj Close", "Volume"]
+        column_names = ["Date","Close", "High", "Low", "Open", "Volume"]
         df.columns = column_names[:len(df.columns)]  # Ajusta dinámicamente
         
         return df

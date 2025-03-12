@@ -39,8 +39,14 @@ data_benchmark = fc.cargar_datos_yfinance(benchmark,'5Y')
 
 data_load_state.markdown(':blue[Loading data... done!]')
 
-current_data = data.loc[data['Date'] > "07-2023"]
-current_data.reset_index(inplace=True)
+st.dataframe(data)
+
+if data is not None:
+    current_data = data.loc[data['Date'] > "07-2023"]
+    current_data.reset_index(inplace=True)
+else:
+    st.warning("No hay datos disponibles para mostrar")
+
 
 "----------"
 
